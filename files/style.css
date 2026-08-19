@@ -92,17 +92,17 @@ body {
 }
 
 .lang-toggle {
-  font-family: var(--mono);
-  font-size: 12px;
-  font-weight: 700;
-  letter-spacing: 0.04em;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  line-height: 1;
   background: transparent;
   border: 1px solid var(--line);
-  color: var(--teal);
-  padding: 4px 9px;
+  padding: 4px 7px;
   border-radius: 6px;
   cursor: pointer;
-  transition: border-color 0.15s ease, color 0.15s ease;
+  transition: border-color 0.15s ease;
 }
 
 .lang-toggle:hover, .lang-toggle:focus-visible {

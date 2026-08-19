@@ -609,7 +609,7 @@
       if (I18N[lang][key] !== undefined) el.setAttribute("aria-label", I18N[lang][key]);
     });
 
-    langToggle.textContent = lang === "no" ? "EN" : "NO";
+    langToggle.textContent = lang === "no" ? "🇬🇧" : "🇳🇴";
     localStorage.setItem("lang", lang);
 
     render();
