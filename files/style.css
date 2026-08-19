@@ -193,6 +193,7 @@ body {
   padding: 12px 14px;
   width: 100%;
   color-scheme: dark;
+  text-align: left;
 }
 
 .field input[type="time"]:focus-visible,
