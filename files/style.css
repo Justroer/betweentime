@@ -196,6 +196,18 @@ body {
   text-align: left;
 }
 
+/* iOS/Safari ignores author padding on the right edge of native date/time
+   inputs unless the default appearance is stripped first. Scoped to iOS
+   WebKit only (via -webkit-touch-callout, unsupported elsewhere) so
+   Chrome/Android keep their native calendar/clock icon. */
+@supports (-webkit-touch-callout: none) {
+  .field input[type="time"],
+  .field input[type="datetime-local"] {
+    -webkit-appearance: none;
+    appearance: none;
+  }
+}
+
 .field input[type="time"]:focus-visible,
 .field input[type="datetime-local"]:focus-visible {
   outline: 2px solid var(--amber);
