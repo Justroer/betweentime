@@ -91,6 +91,25 @@ body {
   color: var(--amber);
 }
 
+.lang-toggle {
+  font-family: var(--mono);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  background: transparent;
+  border: 1px solid var(--line);
+  color: var(--teal);
+  padding: 4px 9px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: border-color 0.15s ease, color 0.15s ease;
+}
+
+.lang-toggle:hover, .lang-toggle:focus-visible {
+  border-color: var(--teal);
+  color: var(--paper);
+}
+
 /* Hero */
 .hero {
   padding-top: 56px;
