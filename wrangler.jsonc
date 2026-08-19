@@ -1,0 +1,8 @@
+{
+  "name": "betweentime",
+  "compatibility_date": "2025-01-01",
+  "assets": {
+    "directory": "./files",
+    "not_found_handling": "404-page"
+  }
+}
