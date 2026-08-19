@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Time Between Two Times Calculator | Between</title>
+<meta name="description" content="Find the exact time between two times, instantly. Handles overnight spans, shows hours, minutes, and seconds. No sign-up, no ads, no fuss.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="grain"></div>
+
+<header class="top">
+  <div class="wrap top-inner">
+    <div class="brand">
+      <span class="brand-mark">◐</span>
+      <span class="brand-name">BETWEEN</span>
+    </div>
+    <nav class="top-nav">
+      <a href="#how">How it works</a>
+      <a href="#faq">FAQ</a>
+      <a href="#more">More tools</a>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <section class="hero">
+    <p class="eyebrow">Time · Duration Calculator</p>
+    <h1>Time between two points</h1>
+    <p class="sub">Set a start and an end. The answer updates as you type — no calculate button, no clutter.</p>
+  </section>
+
+  <div class="tabs" role="tablist">
+    <button class="tab active" id="tabTimeBtn" role="tab" aria-selected="true" aria-controls="panel-time">Two times, same day</button>
+    <button class="tab" id="tabDateBtn" role="tab" aria-selected="false" aria-controls="panel-date">Two dates</button>
+  </div>
+
+  <section class="card panel" id="panel-time">
+
+    <div class="times">
+      <div class="field">
+        <label for="startTime">Start</label>
+        <input type="time" id="startTime" value="08:35" />
+      </div>
+
+      <button class="swap" id="swapBtn" title="Swap start and end" aria-label="Swap start and end times">
+        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M7 10l5-5 5 5M7 14l5 5 5-5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </button>
+
+      <div class="field">
+        <label for="endTime">End</label>
+        <input type="time" id="endTime" value="17:42" />
+      </div>
+    </div>
+
+    <div class="quickrow">
+      <button class="chip" id="nowStartBtn">Start = now</button>
+      <button class="chip" id="nowEndBtn">End = now</button>
+      <label class="chip toggle">
+        <input type="checkbox" id="overnightToggle" />
+        <span>Ends next day</span>
+      </label>
+    </div>
+
+    <div class="result">
+      <div class="flipboard" id="flipboard" aria-live="polite">
+        <!-- digit groups injected by JS -->
+      </div>
+      <p class="overnight-note" id="overnightNote" hidden>Counted through midnight, into the next day.</p>
+    </div>
+
+    <div class="substats">
+      <div class="stat">
+        <span class="stat-value" id="statMinutes">—</span>
+        <span class="stat-label">total minutes</span>
+      </div>
+      <div class="stat">
+        <span class="stat-value" id="statSeconds">—</span>
+        <span class="stat-label">total seconds</span>
+      </div>
+      <div class="stat">
+        <span class="stat-value" id="statDecimal">—</span>
+        <span class="stat-label">decimal hours</span>
+      </div>
+    </div>
+
+    <div class="actions">
+      <button class="btn" id="copyBtn">Copy result</button>
+      <button class="btn ghost" id="shareBtn">Copy shareable link</button>
+    </div>
+    <p class="copy-feedback" id="copyFeedback" aria-live="polite"></p>
+
+  </section>
+
+  <section class="card panel" id="panel-date" hidden>
+
+    <div class="times">
+      <div class="field">
+        <label for="startDate">Start</label>
+        <input type="datetime-local" id="startDate" value="2026-01-15T09:00" />
+      </div>
+
+      <button class="swap" id="swapDateBtn" title="Swap start and end" aria-label="Swap start and end dates">
+        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M7 10l5-5 5 5M7 14l5 5 5-5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </button>
+
+      <div class="field">
+        <label for="endDate">End</label>
+        <input type="datetime-local" id="endDate" value="2026-04-02T17:30" />
+      </div>
+    </div>
+
+    <div class="quickrow">
+      <button class="chip" id="nowStartDateBtn">Start = now</button>
+      <button class="chip" id="nowEndDateBtn">End = now</button>
+    </div>
+
+    <div class="result">
+      <div class="flipboard" id="flipboardDate" aria-live="polite">
+        <!-- digit groups injected by JS -->
+      </div>
+      <p class="calendar-line" id="calendarLine"></p>
+      <p class="overnight-note" id="dstNote" hidden>This span crosses a daylight saving time change — the hour count reflects the actual clock shift, not a flat 24-hour day.</p>
+      <p class="overnight-note leap" id="leapNote" hidden></p>
+      <p class="overnight-note error" id="dateErrorNote" hidden>End is before start. Swap them, or check your dates.</p>
+    </div>
+
+    <div class="substats">
+      <div class="stat">
+        <span class="stat-value" id="statWeeks">—</span>
+        <span class="stat-label">weeks</span>
+      </div>
+      <div class="stat">
+        <span class="stat-value" id="statTotalHours">—</span>
+        <span class="stat-label">total hours</span>
+      </div>
+      <div class="stat">
+        <span class="stat-value" id="statTotalMinutesDate">—</span>
+        <span class="stat-label">total minutes</span>
+      </div>
+    </div>
+
+    <div class="actions">
+      <button class="btn" id="copyDateBtn">Copy result</button>
+      <button class="btn ghost" id="shareDateBtn">Copy shareable link</button>
+    </div>
+    <p class="copy-feedback" id="copyFeedbackDate" aria-live="polite"></p>
+
+  </section>
+
+  <section class="info" id="how">
+    <h2>How the calculation works</h2>
+    <p>Both times are converted to seconds since midnight, then subtracted. If the end time is earlier than the start time, Between assumes the span crosses midnight and adds 24 hours automatically — so 22:00 to 03:00 correctly reads as 5 hours instead of throwing a negative number.</p>
+
+    <div class="example">
+      <p class="example-label">Example</p>
+      <p><span class="mono">08:15</span> → <span class="mono">16:45</span> = <strong>8 hours 30 minutes</strong></p>
+    </div>
+
+    <h3>12-hour vs 24-hour time</h3>
+    <p>Your browser's time input follows your system settings, so it may show a 12-hour clock with AM/PM or a 24-hour clock — either way, the calculation underneath is identical.</p>
+
+    <h3>Two dates: daylight saving and leap years</h3>
+    <p>The "Two dates" tab doesn't assume every day is 24 hours. It works out the real elapsed time between two exact moments, so if your span crosses a daylight saving change, the one day that's actually 23 or 25 hours long is counted correctly instead of silently losing or gaining an hour. Leap years are handled the same way — a range that includes February 29th counts that day like any other, and the calendar breakdown (years, months, days) is always based on real calendar lengths, not a fixed 30-day month.</p>
+  </section>
+
+  <section class="info" id="faq">
+    <h2>Frequently asked questions</h2>
+
+    <details>
+      <summary>Does this handle overnight spans?</summary>
+      <p>Yes. If your end time is earlier in the day than your start time, Between treats it as ending the next day and calculates accordingly. You can also tick "Ends next day" explicitly if a span happens to start and end at the same clock time 24 hours apart.</p>
+    </details>
+
+    <details>
+      <summary>Does it include seconds?</summary>
+      <p>The main input works in hours and minutes, matching how most people think about a schedule. The result panel shows the total down to the second.</p>
+    </details>
+
+    <details>
+      <summary>Can I share a calculation with someone?</summary>
+      <p>Yes — use "Copy shareable link." It saves your start and end time in the URL, so anyone who opens the link sees the same calculation.</p>
+    </details>
+
+    <details>
+      <summary>Is my data stored anywhere?</summary>
+      <p>No. Everything happens in your browser. Nothing is sent to a server or saved.</p>
+    </details>
+
+    <details>
+      <summary>Does the "Two dates" calculator account for daylight saving time?</summary>
+      <p>Yes. It compares two exact moments in your local time zone, so a span that crosses a spring-forward or fall-back change comes out as 23 or 25 hours for that one day rather than a flat 24 — you'll see a note when this happens.</p>
+    </details>
+
+    <details>
+      <summary>Does it handle leap years correctly?</summary>
+      <p>Yes. February 29th is counted like any other day, and the year/month/day breakdown always uses the real number of days in each month and year, so results stay accurate across leap years.</p>
+    </details>
+  </section>
+
+  <section class="info" id="more">
+    <h2>Related tools</h2>
+    <p class="muted">More calculators in this family are on the way: hours between two dates, days between two dates, age in days, and time-until countdowns — all built on the same simple, fast interface.</p>
+  </section>
+
+</main>
+
+<footer class="foot">
+  <div class="wrap">
+    <p>Between — a small, fast calculator. No account, no tracking of what you calculate.</p>
+  </div>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>
