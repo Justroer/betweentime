@@ -209,7 +209,11 @@
     tabDateBtn.classList.toggle("active", showDate);
     tabTimeBtn.setAttribute("aria-selected", String(!showDate));
     tabDateBtn.setAttribute("aria-selected", String(showDate));
-    if (showDate) renderDate();
+    if (showDate) {
+      renderDate();
+    } else {
+      render();
+    }
   }
 
   tabTimeBtn.addEventListener("click", () => switchTab("time"));
